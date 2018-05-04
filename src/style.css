@@ -1,0 +1,40 @@
+.flextable {
+  display: flex;
+  flex-flow: column nowrap;
+  flex: 1 1 auto;
+}
+
+.flextable-header,
+.flextable-row {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.flextable-header > .flextable-cell,
+.flextable-header > .flextable-cell-clickable {
+  white-space: normal;
+  justify-content: center;
+}
+
+.flextable-row:nth-of-type(even) {
+  background-color: #f2f2f2;
+}
+
+.flextable-cell,
+.flextable-cell-clickable {
+  display: flex;
+  flex-flow: row nowrap;
+  flex-grow: 1;
+  flex-basis: 0;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0px;
+  white-space: nowrap;
+}
+
+.flextable-cell-clickable {
+  user-select: none;
+  cursor: pointer;
+}
