@@ -148,17 +148,12 @@ export default class FlexTable extends React.Component {
                   ? `flextable-cell ${item.dataClass}`
                   : 'flextable-cell';
 
-                // If a formatter callback was provided run row through the callback
-                if (item.formatter && item.formatter(row)) {
-                  className += ` ${item.formatter(row)}`;
-                }
-
                 // Decide if data should be visible
                 if (item.visible !== undefined && !item.visible) {
                   return null;
                 }
 
-                if (item.data) {
+                if (item.customData) {
                   const field = item.name ? item.name : item;
                   const props = { row, field };
                   return (
@@ -167,7 +162,7 @@ export default class FlexTable extends React.Component {
                       className={className}
                       style={item.grow ? { flexGrow: item.grow } : undefined}
                     >
-                      {React.cloneElement(item.data, props)}
+                      {React.cloneElement(item.customData, props)}
                     </div>
                   );
                 }
@@ -179,13 +174,14 @@ export default class FlexTable extends React.Component {
                       className={className}
                       style={item.grow ? { flexGrow: item.grow } : undefined}
                     >
-                      {row[item.name]}
+                      {item.formatter ? item.formatter(row[item.name]) : row[item.name]}
                     </div>
                   );
                 }
+
                 return (
                   <div key={j} className="flextable-cell">
-                    {row[item]}
+                    {item.formatter ? item.formatter(row[item]) : row[item]}
                   </div>
                 );
               })}
